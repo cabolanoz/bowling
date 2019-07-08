@@ -1,5 +1,6 @@
 # Require helper class
 load 'helper.rb'
+load 'score.rb'
 
 # Verify whether there's any file as argument
 if ARGV.length != 1
@@ -19,10 +20,17 @@ unless helper.file_exists?
     exit
 end
 
-# Print header
-p 'Frame        1       2       3       4       5       6       7       8       9       10'
+# Grabs frames from play method in helper
+frames = helper.play
 
-# Grab players from file
-players = helper.players
+# Verify if there was any frame build from the file
+unless frames.length.positive?
+    p 'No gameplay specified in file'
+    exit
+end
 
-p players
+# Print the result
+score = Score.new(frames)
+
+# Print score
+score.print_score
