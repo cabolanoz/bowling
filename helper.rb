@@ -6,18 +6,34 @@ class Helper
         @filename = filename
     end
 
-    # Verify whether the file exists
+    # Verifies whether the file exists
     # @param
     # @return - Boolean
     def file_exists?
         File.exists?(@filename)
     end
 
-    # Verify whether the file has a vali extension
+    # Verifies whether the file has a vali extension
     # @param
     # @return - Boolean
     def file_has_valid_extension?
         file_extension = File.extname(@filename)
         ACCEPTED_FILE_EXTENSIONS.include? file_extension
+    end
+
+    # Grabs unique players from file
+    # @param
+    # @return - Array[String]
+    def players
+        unique_players = []
+
+        # Iterate each line from the file
+        File.open(@filename).each do |line|
+            # Separate player name from score
+            unique_players << line.split(' ').first
+        end
+
+        # Clean array with unique elements
+        unique_players.uniq.sort!
     end
 end

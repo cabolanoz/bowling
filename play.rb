@@ -19,7 +19,10 @@ unless helper.file_exists?
     exit
 end
 
-# Iterate through all lines in the file
-File.open(filename).each do |line|
-    p line.split(' ')
-end
+# Print header
+p 'Frame        1       2       3       4       5       6       7       8       9       10'
+
+# Grab players from file
+players = helper.players
+
+p players
